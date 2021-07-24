@@ -7,7 +7,7 @@
                     <span>Main</span>
                 </li>
                 <li class="active">
-                    <a href="index.html"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                    <a href="{{ route('admin.dashboard') }}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                 </li>
 
                 <li class="submenu">
@@ -21,8 +21,8 @@
                 <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="login.html"> Posts </a></li>
-                        <li><a href="register.html"> Category </a></li>
+                        <li><a href="{{ route('post.index') }}"> Posts </a></li>
+                        <li><a href="{{ route('category.index') }}"> Category </a></li>
                         <li><a href="forgot-password.html"> Tag </a></li>
                     </ul>
                 </li>
