@@ -47,27 +47,35 @@
                                     <table class="table table-striped mb-0">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Post Title</th>
-                                            <th>Category</th>
-                                            <th>Tag</th>
-                                            <th>Date</th>
+                                            <th>#SI</th>
+                                            <th>Category Name</th>
+                                            <th>Category Slug</th>
+                                            <th>Create Time</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach( $all_data as $data )
                                         <tr>
-                                            <td>1</td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                            <td>john@example.com</td>
-                                            <td>john@example.com</td>
+                                            <td>{{ $loop -> index + 1 }}</td>
+                                            <td>{{ $data -> name }}</td>
+                                            <td>{{ $data -> slug }}</td>
+                                            <td>{{ $data -> created_at->diffForHumans() }}</td>
+                                            <td>
+                                                @if( $data -> status == true)
+                                                    <span class="badge badge-success">Published</span>
+                                                @else
+                                                    <span class="badge badge-danger">Unpublished</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="#" class="btn btn-sm btn-info">View</a>
                                                 <a href="#" class="btn btn-sm btn-warning">Edit</a>
                                                 <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

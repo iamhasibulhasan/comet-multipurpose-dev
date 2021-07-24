@@ -1,5 +1,5 @@
 <script>
-    
+
 @if($errors->any())
     swal('Error', '{{ $errors->first() }}', 'warning');
 @endif
