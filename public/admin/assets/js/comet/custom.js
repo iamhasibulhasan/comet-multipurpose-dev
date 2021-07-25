@@ -20,7 +20,7 @@
                     url: 'category/status/inactive/' + id,
                     success:function (data){
                         swal({
-                            title: "Inative !",
+                            title: "Inactive !",
                             text: "Status inactivate successful!",
                             icon: "warning",
                         }).then((value)=>{
@@ -28,12 +28,12 @@
                         });
                     }
                 });
-            }else {
+            }else{
                 $.ajax({
                     url: 'category/status/active/' + id,
                     success:function (data){
                         swal({
-                            title: "Active !",
+                            title: "Activate !",
                             text: "Status activate successful!",
                             icon: "success",
                         }).then((value)=>{
