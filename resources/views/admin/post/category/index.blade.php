@@ -71,7 +71,7 @@
                                             <td>
 
 {{--                                                <a href="#" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                                                <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#" class="btn btn-sm btn-warning edit-category-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                 {{--Delete Btn With Form--}}
                                                 <form class="d-inline" action="{{ route('category.destroy', $data->id) }}" method="POST">
                                                     @csrf
@@ -127,6 +127,36 @@
     </div>
 
     <!-- /Add new category modal -->
+
+    <!-- Edit category modal -->
+
+    <div class="modal fade" id="edit_category_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3>Edit category</h3>
+                    <hr>
+                    <form action="{{ route('category.update', 1) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control">
+                            <input name="edit_id" type="hidden" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Edit category modal -->
 
 
 
