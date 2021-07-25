@@ -9,6 +9,42 @@
         });
 
 
+    //    Category Status Update
+        $(document).on('click', 'input.cat-check', function (){
+
+            let checked = $(this).attr('checked');
+            let id = $(this).attr('status_id');
+
+            if (checked == 'checked'){
+                $.ajax({
+                    url: 'category/status/inactive/' + id,
+                    success:function (data){
+                        swal({
+                            title: "Inative !",
+                            text: "Status inactivate successful!",
+                            icon: "warning",
+                        }).then((value)=>{
+                            location.reload();
+                        });
+                    }
+                });
+            }else {
+                $.ajax({
+                    url: 'category/status/active/' + id,
+                    success:function (data){
+                        swal({
+                            title: "Active !",
+                            text: "Status activate successful!",
+                            icon: "success",
+                        }).then((value)=>{
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+
+
 
 
 

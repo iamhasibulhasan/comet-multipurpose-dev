@@ -41,5 +41,7 @@ Route::resource('post', 'App\Http\Controllers\PostController');
  * Category Routes
  */
 Route::resource('category', 'App\Http\Controllers\CategoryController');
+Route::get('category/status/active/{id}', 'App\Http\Controllers\CategoryController@categoryStatusActive');
+Route::get('category/status/inactive/{id}', 'App\Http\Controllers\CategoryController@categoryStatusInactive');
 
 

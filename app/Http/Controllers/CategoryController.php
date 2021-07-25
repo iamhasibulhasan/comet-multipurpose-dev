@@ -95,4 +95,19 @@ class CategoryController extends Controller
     {
         //
     }
+
+    /**
+     * Category Status Update[Active Or Inactive]
+     */
+    public function categoryStatusInactive($id){
+        $status_update = Category::find($id);
+        $status_update -> status = false;
+        $status_update -> update();
+    }
+
+    public function categoryStatusActive($id){
+        $status_update = Category::find($id);
+        $status_update -> status = true;
+        $status_update -> update();
+    }
 }

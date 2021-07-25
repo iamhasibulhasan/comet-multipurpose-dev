@@ -63,16 +63,16 @@
                                             <td>{{ $data -> slug }}</td>
                                             <td>{{ $data -> created_at->diffForHumans() }}</td>
                                             <td>
-                                                @if( $data -> status == true)
-                                                    <span class="badge badge-success">Published</span>
-                                                @else
-                                                    <span class="badge badge-danger">Unpublished</span>
-                                                @endif
+                                                <div class="status-toggle">
+                                                    <input type="checkbox" status_id="{{ $data->id }}" {{ $data->status==true ? 'checked="checked"' : '' }} id="category_status_{{ $loop -> index + 1 }}" class="check cat-check">
+                                                    <label for="category_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
+                                                </div>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
-                                                <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+
+{{--                                                <a href="#" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
+                                                <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
