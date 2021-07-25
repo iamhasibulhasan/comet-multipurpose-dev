@@ -43,5 +43,7 @@ Route::get('category/status/inactive/{id}', 'App\Http\Controllers\CategoryContro
 
 //Post Tag Route
 Route::resource('tag', 'App\Http\Controllers\TagController');
+Route::get('tag/status/active/{id}', 'App\Http\Controllers\TagController@tagStatusActive');
+Route::get('tag/status/inactive/{id}', 'App\Http\Controllers\TagController@tagStatusInactive');
 
 

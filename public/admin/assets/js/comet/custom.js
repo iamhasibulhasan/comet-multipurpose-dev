@@ -9,7 +9,7 @@
         });
 
 
-    //    Category Status Update
+    //    Post Category Status Update
         $(document).on('click', 'input.cat-check', function (){
 
             let checked = $(this).attr('checked');
@@ -45,7 +45,7 @@
         });
 
 
-    //    Delete Btn Message Category
+    //    Post Delete Btn Message Category
         $(document).on('click', '#delete_btn', function (){
 
             let conf = confirm('Are you sure?');
@@ -75,7 +75,7 @@
 
         });
 
-    //    Edit Category Modal Show With Data
+    //    Post Edit Category Modal Show With Data
         $(document).on('click', '.edit-category-btn', function (e){
             e.preventDefault();
             let id = $(this).attr('edit_id');
@@ -91,7 +91,7 @@
 
         });
 
-        //    Delete Btn Message Tag
+        //    Post Delete Btn Message Tag
         $(document).on('click', '#tag_delete_btn', function (){
 
             let conf = confirm('Are you sure?');
@@ -103,7 +103,7 @@
 
         });
 
-        //    Edit Tag Modal Show With Data
+        //   Post Edit Tag Modal Show With Data
         $(document).on('click', '.edit-tag-btn', function (e){
             e.preventDefault();
             let id = $(this).attr('edit_id');
@@ -120,6 +120,40 @@
 
         });
 
+        //   Post Tag Status Update
+        $(document).on('click', 'input.tag-check', function (){
+
+            let checked = $(this).attr('checked');
+            let id = $(this).attr('status_id');
+
+            if (checked == 'checked'){
+                $.ajax({
+                    url: 'tag/status/inactive/' + id,
+                    success:function (data){
+                        swal({
+                            title: "Inactive !",
+                            text: "Status inactivate successful!",
+                            icon: "warning",
+                        }).then((value)=>{
+                            location.reload();
+                        });
+                    }
+                });
+            }else{
+                $.ajax({
+                    url: 'tag/status/active/' + id,
+                    success:function (data){
+                        swal({
+                            title: "Activate !",
+                            text: "Status activate successful!",
+                            icon: "success",
+                        }).then((value)=>{
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
 
 
 

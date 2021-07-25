@@ -108,4 +108,19 @@ class TagController extends Controller
         $delete_data->delete();
         return redirect()->back()->with('success', 'Tag deleted successful !');
     }
+
+    /**
+     * Tag Status Update[Active Or Inactive]
+     */
+    public function tagStatusInactive($id){
+        $status_update = Tag::find($id);
+        $status_update -> status = false;
+        $status_update -> update();
+    }
+
+    public function tagStatusActive($id){
+        $status_update = Tag::find($id);
+        $status_update -> status = true;
+        $status_update -> update();
+    }
 }

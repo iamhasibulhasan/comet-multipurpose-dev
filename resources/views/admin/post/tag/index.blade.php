@@ -64,8 +64,8 @@
                                                 <td>{{ $data -> created_at->diffForHumans() }}</td>
                                                 <td>
                                                     <div class="status-toggle">
-                                                        <input type="checkbox" status_id="{{ $data->id }}" {{ $data->status==true ? 'checked="checked"' : '' }} id="category_status_{{ $loop -> index + 1 }}" class="check cat-check">
-                                                        <label for="category_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
+                                                        <input type="checkbox" status_id="{{ $data->id }}" {{ $data->status==true ? 'checked="checked"' : '' }} id="tag_status_{{ $loop -> index + 1 }}" class="check tag-check">
+                                                        <label for="tag_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
                                                     </div>
                                                 </td>
                                                 <td>
