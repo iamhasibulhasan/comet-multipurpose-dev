@@ -89,10 +89,6 @@
                 }
             });
 
-
-
-
-
         });
 
         //    Delete Btn Message Tag
@@ -104,6 +100,23 @@
             }else {
                 return false;
             }
+
+        });
+
+        //    Edit Tag Modal Show With Data
+        $(document).on('click', '.edit-tag-btn', function (e){
+            e.preventDefault();
+            let id = $(this).attr('edit_id');
+            // alert(id);
+
+            $.ajax({
+                url: 'tag/' + id + '/edit',
+                success: function (data){
+                    $('#edit_tag_modal form input[name = "name"]').val(data.name);
+                    $('#edit_tag_modal form input[name = "edit_id"]').val(data.id);
+                    $('#edit_tag_modal').modal('show');
+                }
+            });
 
         });
 

@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>
 
-                                                    <a href="#" class="btn btn-sm btn-warning edit-category-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    <a href="#" class="btn btn-sm btn-warning edit-tag-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                     {{--Delete Btn With Form--}}
                                                     <form class="d-inline" action="{{ route('tag.destroy', $data->id) }}" method="POST">
                                                         @csrf
@@ -129,16 +129,16 @@
 
     <!-- Edit tag modal -->
 
-    <div class="modal fade" id="edit_category_modal">
+    <div class="modal fade" id="edit_tag_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3>Edit category</h3>
+                    <h3>Edit tag</h3>
                     <hr>
-                    <form action="{{ route('category.update', 1) }}" method="POST">
+                    <form action="{{ route('tag.update', 1) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
