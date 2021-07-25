@@ -45,6 +45,37 @@
         });
 
 
+    //    Delete Btn Message
+        $(document).on('click', '#delete_btn', function (){
+
+            let conf = confirm('Are you sure?');
+            if (conf == true){
+                return true;
+            }else {
+                return false;
+            }
+            /*swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this category!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! Your category file has been deleted!", {
+                            icon: "success",
+                        });
+                        return conf;
+                    } else {
+                        swal("Your category file is safe!");
+                        return conf == false;
+                    }
+                });*/
+
+        });
+
+
 
 
 

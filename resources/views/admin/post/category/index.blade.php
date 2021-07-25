@@ -72,7 +72,13 @@
 
 {{--                                                <a href="#" class="btn btn-sm btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                                 <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                {{--Delete Btn With Form--}}
+                                                <form class="d-inline" action="{{ route('category.destroy', $data->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button id="delete_btn" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                </form>
+                                                {{--/Delete Btn With Form--}}
                                             </td>
                                         </tr>
                                         @endforeach
