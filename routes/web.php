@@ -32,16 +32,16 @@ Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, '
 Route::post('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
 Route::post('/admin/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('admin.register');
 
-/**
- * Post Routes
- */
+//Post Route
 Route::resource('post', 'App\Http\Controllers\PostController');
 
-/**
- * Category Routes
- */
+//Post Category Route
 Route::resource('category', 'App\Http\Controllers\CategoryController');
 Route::get('category/status/active/{id}', 'App\Http\Controllers\CategoryController@categoryStatusActive');
 Route::get('category/status/inactive/{id}', 'App\Http\Controllers\CategoryController@categoryStatusInactive');
+
+
+//Post Tag Route
+Route::resource('tag', 'App\Http\Controllers\TagController');
 
 
