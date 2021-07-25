@@ -45,7 +45,7 @@
         });
 
 
-    //    Delete Btn Message
+    //    Delete Btn Message Category
         $(document).on('click', '#delete_btn', function (){
 
             let conf = confirm('Are you sure?');
@@ -75,7 +75,7 @@
 
         });
 
-    //    Edit Modal Show With Data
+    //    Edit Category Modal Show With Data
         $(document).on('click', '.edit-category-btn', function (e){
             e.preventDefault();
             let id = $(this).attr('edit_id');
@@ -92,6 +92,18 @@
 
 
 
+
+        });
+
+        //    Delete Btn Message Tag
+        $(document).on('click', '#tag_delete_btn', function (){
+
+            let conf = confirm('Are you sure?');
+            if (conf == true){
+                return true;
+            }else {
+                return false;
+            }
 
         });
 
