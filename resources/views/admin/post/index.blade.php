@@ -11,7 +11,7 @@
 
     @include('admin.layouts.menu')
 
-        <!-- Page Wrapper -->
+    <!-- Page Wrapper -->
         <div class="page-wrapper">
 
             <div class="content container-fluid">
@@ -22,7 +22,7 @@
                         <div class="col-sm-12">
                             <h3 class="page-title">Welcome {{ Auth::user()->name }}!</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item active">Post</li>
+                                <li class="breadcrumb-item active">Tag</li>
                             </ul>
                         </div>
                     </div>
@@ -33,7 +33,11 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <a href="#" class="btn btn-primary btn-sm">Add new post</a>
+
+                        {{--Error & Success Message Show Here--}}
+                        @include('validate')
+
+                        <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm">Add new post</a>
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Posts</h4>
@@ -43,27 +47,40 @@
                                     <table class="table table-striped mb-0">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Post Title</th>
-                                            <th>Category</th>
-                                            <th>Tag</th>
-                                            <th>Date</th>
+                                            <th>#SI</th>
+                                            <th>Post Name</th>
+                                            <th>Post Slug</th>
+                                            <th>Create Time</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                            <td>john@example.com</td>
-                                            <td>john@example.com</td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
-                                                <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                            </td>
-                                        </tr>
+                                        @foreach( $all_data as $data )
+                                            <tr>
+                                                <td>{{ $loop -> index + 1 }}</td>
+                                                <td>{{ $data -> name }}</td>
+                                                <td>{{ $data -> slug }}</td>
+                                                <td>{{ $data -> created_at->diffForHumans() }}</td>
+                                                <td>
+                                                    <div class="status-toggle">
+                                                        <input type="checkbox" status_id="{{ $data->id }}" {{ $data->status==true ? 'checked="checked"' : '' }} id="tag_status_{{ $loop -> index + 1 }}" class="check tag-check">
+                                                        <label for="tag_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
+                                                    </div>
+                                                </td>
+                                                <td>
+
+                                                    <a href="#" class="btn btn-sm btn-warning edit-tag-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    {{--Delete Btn With Form--}}
+                                                    <form class="d-inline" action="{{ route('tag.destroy', $data->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button id="tag_delete_btn" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                    </form>
+                                                    {{--/Delete Btn With Form--}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -81,6 +98,66 @@
 
     </div>
     <!-- /Main Wrapper -->
+
+    <!-- Add new tag modal -->
+
+    <div class="modal fade" id="add_new_tag_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3>Add new category</h3>
+                    <hr>
+                    <form action="{{ route('tag.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Add new tag modal -->
+
+    <!-- Edit tag modal -->
+
+    <div class="modal fade" id="edit_tag_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3>Edit tag</h3>
+                    <hr>
+                    <form action="{{ route('tag.update', 1) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control">
+                            <input name="edit_id" type="hidden" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Edit tag modal -->
+
+
 
 
 

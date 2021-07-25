@@ -2,6 +2,12 @@
     $(document).ready(function (){
 
 
+    // Load CK Editor
+        CKEDITOR.replace('post_content');
+
+    //    Select 2 Load
+        $('.post_tag_select').select2();
+
     //    Logout Features
         $(document).on('click', '#logout_btn', function (e){
             e.preventDefault();
@@ -155,7 +161,11 @@
             }
         });
 
-
+    //Post Image Preview
+        $('#post_featured_img').change(function (e){
+            let img_url = URL.createObjectURL(e.target.files[0]);
+            $('.post-featured-preview').attr('src', img_url);
+        });
 
 
 

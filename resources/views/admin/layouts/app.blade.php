@@ -20,6 +20,9 @@
 
     <link rel="stylesheet" href="{{ asset('admin/assets/plugins/morris/morris.css') }}">
 
+    <!-- Select 2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Sweet Alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Main CSS -->
@@ -50,6 +53,12 @@
 <script src="{{ asset('admin/assets/plugins/raphael/raphael.min.js') }}"></script>
 <script src="{{ asset('admin/assets/plugins/morris/morris.min.js') }}"></script>
 <script src="{{ asset('admin/assets/js/chart.morris.js') }}"></script>
+
+<!-- Select 2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- CK Editor Load -->
+<script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
 
 <!-- Custom JS -->
 <script src="{{ asset('admin/assets/js/script.js') }}"></script>
