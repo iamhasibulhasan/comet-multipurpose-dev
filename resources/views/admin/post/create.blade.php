@@ -41,6 +41,19 @@
                             <div class="card-body">
                                 <form action="#">
                                     <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label">Post Format</label>
+                                        <div class="col-lg-9">
+                                            <select class="form-control" name="" id="post_format">
+                                                <option value="">-Select-</option>
+                                                <option value="Image">Image</option>
+                                                <option value="Gallery">Gallery</option>
+                                                <option value="Video">Video</option>
+                                                <option value="Audio">Audio</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Post Title</label>
                                         <div class="col-lg-9">
                                             <input type="text" class="form-control">
@@ -60,16 +73,54 @@
 
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label">Featured image</label>
-                                        <div class="col-lg-9">
-{{--                                            <img style="width: 150px; height: 150px" alt="" class="post-featured-preview"><br>--}}
-                                            <label for="post_featured_img">
-                                                <img class="post-featured-preview" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
-                                            </label>
-                                            <input style="display: none;" type="file" id="post_featured_img">
+
+
+                                    <div class="post-image">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Post image</label>
+                                            <div class="col-lg-9">
+                                                <img style="" alt="" class="post-featured-preview"><br>
+                                                <label for="post_featured_img">
+                                                    <img class="" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
+                                                </label>
+                                                <input style="display: none;" type="file" id="post_featured_img">
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="post-gallery">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Post gallery</label>
+                                            <div class="col-lg-9">
+                                                <img style="" alt="" class="post-featured-preview-gallery_1">
+                                                <img style="" alt="" class="post-featured-preview-gallery_2">
+                                                <img style="" alt="" class="post-featured-preview-gallery_3">
+                                                <img style="" alt="" class="post-featured-preview-gallery_4">
+
+                                                <br>
+                                                <label for="post_featured_img_gallery">
+                                                    <img class="" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
+                                                </label>
+                                                <input style="display: none;" type="file" id="post_featured_img_gallery" multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-video">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Post Video Link</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div><div class="post-audio">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Post Audio Link</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Tag</label>
                                         <div class="col-lg-9">
