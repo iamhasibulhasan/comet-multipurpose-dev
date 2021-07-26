@@ -171,21 +171,15 @@
 
         //Post Image Preview Gallery
         $('#post_featured_img_gallery').change(function (e){
-            let img_url_1 = URL.createObjectURL(e.target.files[0]);
-            let img_url_2 = URL.createObjectURL(e.target.files[1]);
-            let img_url_3 = URL.createObjectURL(e.target.files[2]);
-            let img_url_4 = URL.createObjectURL(e.target.files[3]);
+            let img_gallery = '';
 
-            $('.post-featured-preview-gallery_1').attr('src', img_url_1);
-            $('.post-featured-preview-gallery_2').attr('src', img_url_2);
-            $('.post-featured-preview-gallery_3').attr('src', img_url_3);
-            $('.post-featured-preview-gallery_4').attr('src', img_url_4);
+            console.log(e.target.files.length);
+            for (let i=0; i < e.target.files.length; i++){
+                let file_url = URL.createObjectURL(e.target.files[i]);
+                img_gallery += '<img class="shadow" src="'+ file_url +'">';
+            }
+            $('.post-gallery-img').html(img_gallery);
 
-            $('.post-featured-preview-gallery_1').attr('style', 'width:150px; height:150px;');
-            $('.post-featured-preview-gallery_2').attr('style', 'width:150px; height:150px;');
-            $('.post-featured-preview-gallery_3').attr('style', 'width:150px; height:150px;');
-            $('.post-featured-preview-gallery_4').attr('style', 'width:150px; height:150px;');
-            
         });
 
 

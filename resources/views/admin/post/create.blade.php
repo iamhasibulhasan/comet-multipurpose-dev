@@ -91,14 +91,10 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label">Post gallery</label>
                                             <div class="col-lg-9">
-                                                <img style="" alt="" class="post-featured-preview-gallery_1">
-                                                <img style="" alt="" class="post-featured-preview-gallery_2">
-                                                <img style="" alt="" class="post-featured-preview-gallery_3">
-                                                <img style="" alt="" class="post-featured-preview-gallery_4">
-
+                                                <div class="post-gallery-img"></div>
                                                 <br>
                                                 <label for="post_featured_img_gallery">
-                                                    <img class="" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
+                                                    <img class="shadow" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
                                                 </label>
                                                 <input style="display: none;" type="file" id="post_featured_img_gallery" multiple>
                                             </div>
