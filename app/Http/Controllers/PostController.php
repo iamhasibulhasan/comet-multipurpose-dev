@@ -45,12 +45,15 @@ class PostController extends Controller
 
         if($trash_data->trash == false){
             $trash_data ->trash = true;
+            $trash_data -> update();
+            return redirect()->back()->with('success', 'Post trashed successful.');
         }else{
             $trash_data ->trash = false;
+            $trash_data -> update();
+            return redirect()->back()->with('success', 'Post restore successful.');
         }
 
-        $trash_data -> update();
-        return redirect() -> back()->with('danger', 'Post trashed successful.');
+
     }
 
     /**
@@ -160,7 +163,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_data = Post::find($id);
+        $delete_data -> delete();
+        return redirect()->back()->with('success', 'Data deleted permanently.');
     }
 
     /**

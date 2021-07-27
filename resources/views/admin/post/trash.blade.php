@@ -67,7 +67,12 @@
                                                 <td>
 
                                                     <a href="{{ route('post.trash.update', $data->id) }}" class="btn btn-sm btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i> Restore</a>
-                                                    <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Permanently Delete</a>
+
+                                                    <form class="d-inline-block" action="{{ route('post.destroy', $data->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Permanently Delete</button>
+                                                    </form>
 
                                                 </td>
                                             </tr>
