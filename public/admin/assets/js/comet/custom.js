@@ -3,7 +3,7 @@
 
 
     // Load CK Editor
-        CKEDITOR.replace('post_content');
+        CKEDITOR.replace('post_content_editor');
 
     //    Select 2 Load
         $('.post_tag_select').select2();
@@ -208,6 +208,41 @@
                 $('.post-audio').hide();
             }
 
+        });
+
+        //   Post Status Update
+        $(document).on('click', 'input.post-check', function (){
+
+            let checked = $(this).attr('checked');
+            let id = $(this).attr('status_id');
+
+            if (checked == 'checked'){
+                $.ajax({
+                    url: 'post/status/inactive/' + id,
+                    success:function (data){
+                        swal({
+                            title: "Inactive !",
+                            text: "Status inactivate successful!",
+                            icon: "warning",
+                        }).then((value)=>{
+                            location.reload();
+                        });
+                    }
+                });
+            }else{
+                $.ajax({
+                    url: 'post/status/active/' + id,
+                    success:function (data){
+                        swal({
+                            title: "Activate !",
+                            text: "Status activate successful!",
+                            icon: "success",
+                        }).then((value)=>{
+                            location.reload();
+                        });
+                    }
+                });
+            }
         });
 
 

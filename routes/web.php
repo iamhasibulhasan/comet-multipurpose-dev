@@ -34,6 +34,9 @@ Route::post('/admin/register', [App\Http\Controllers\Auth\RegisterController::cl
 
 //Post Route
 Route::resource('post', 'App\Http\Controllers\PostController');
+Route::get('post/status/active/{id}', 'App\Http\Controllers\PostController@postStatusActive');
+Route::get('post/status/inactive/{id}', 'App\Http\Controllers\PostController@postStatusInactive');
+Route::get('post-trash', 'App\Http\Controllers\PostController@postTrash')->name('post.trash');
 
 //Post Category Route
 Route::resource('category', 'App\Http\Controllers\CategoryController');

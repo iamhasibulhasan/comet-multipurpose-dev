@@ -40,7 +40,7 @@
                         <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm">Add new post</a>
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">All Posts [ Published ]</h4>
+                                <h4 class="card-title">All Posts [ Trash ]</h4>
                                 <a class="badge badge-primary" href="{{ route('post.index') }}">Published</a>
                                 <a class="badge badge-danger" href="{{ route('post.trash') }}">Trash</a>
                             </div>

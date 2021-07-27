@@ -33,17 +33,19 @@
                 <!-- Add New Post -->
 
                 <div class="row">
+                    @include('validate')
                     <div class="col-lg-12 d-flex">
                         <div class="card flex-fill">
                             <div class="card-header">
                                 <h4 class="card-title">Add New Post</h4>
                             </div>
                             <div class="card-body">
-                                <form action="#">
+                                <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Post Format</label>
                                         <div class="col-lg-9">
-                                            <select class="form-control" name="" id="post_format">
+                                            <select class="form-control" name="post_type" id="post_format">
                                                 <option value="">-Select-</option>
                                                 <option value="Image">Image</option>
                                                 <option value="Gallery">Gallery</option>
@@ -56,7 +58,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Post Title</label>
                                         <div class="col-lg-9">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="post_title" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -66,7 +68,7 @@
                                             @foreach( $all_category as $category )
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="{{ $category->id }}" name="category[]"> {{ $category->name }}
+                                                        <input type="checkbox" value="{{ $category->id }}" name="post_category[]"> {{ $category->name }}
                                                     </label>
                                                 </div>
                                             @endforeach
@@ -83,7 +85,7 @@
                                                 <label for="post_featured_img">
                                                     <img class="" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
                                                 </label>
-                                                <input style="display: none;" type="file" id="post_featured_img">
+                                                <input style="display: none;" name="post_image" type="file" id="post_featured_img">
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +98,7 @@
                                                 <label for="post_featured_img_gallery">
                                                     <img class="shadow" style="width: 80px; cursor: pointer;" src="{{ URL::to('admin/assets/img/img.png') }}" alt="">
                                                 </label>
-                                                <input style="display: none;" type="file" id="post_featured_img_gallery" multiple>
+                                                <input style="display: none;" name="post_gallery[]" type="file" id="post_featured_img_gallery" multiple>
                                             </div>
                                         </div>
                                     </div>
@@ -104,14 +106,15 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label">Post Video Link</label>
                                             <div class="col-lg-9">
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="post_video" class="form-control">
                                             </div>
                                         </div>
-                                    </div><div class="post-audio">
+                                    </div>
+                                    <div class="post-audio">
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label">Post Audio Link</label>
                                             <div class="col-lg-9">
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="post_audio" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +133,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Content</label>
                                         <div class="col-lg-9">
-                                            <textarea name="" id="post_content" cols="30" rows="10"></textarea>
+                                            <textarea name="post_content" id="post_content_editor" cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                     <div class="text-right">
