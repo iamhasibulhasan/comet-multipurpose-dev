@@ -36,13 +36,12 @@
 
                         {{--Error & Success Message Show Here--}}
                         @include('validate')
-
                         <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm">Add new post</a>
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Posts [ Trash ]</h4>
-                                <a class="badge badge-primary" href="{{ route('post.index') }}">Published</a>
-                                <a class="badge badge-danger" href="{{ route('post.trash') }}">Trash</a>
+                                <a class="badge badge-primary" href="{{ route('post.index') }}">Published {{ ($published == 0 ? '' : '('.$published.')') }}</a>
+                                <a class="badge badge-danger" href="{{ route('post.trash') }}">Trash {{ ($trash == 0 ? '' : '('.$trash.')') }}</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
