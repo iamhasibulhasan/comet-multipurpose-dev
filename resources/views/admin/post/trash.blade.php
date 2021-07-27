@@ -52,10 +52,6 @@
                                             <th>#SI</th>
                                             <th>Post Title</th>
                                             <th>Post Type</th>
-                                            <th>Post Category</th>
-                                            <th>Post Tag</th>
-                                            <th>Create Time</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -68,25 +64,11 @@
                                                 <td>{{ $loop -> index + 1 }}</td>
                                                 <td>{{ $data -> title }}</td>
                                                 <td>{{ $featured_data -> post_type }}</td>
-                                                <td>{{ $featured_data -> post_type }}</td>
-                                                <td>{{ $featured_data -> post_type }}</td>
-                                                <td>{{ $data -> created_at->diffForHumans() }}</td>
-                                                <td>
-                                                    <div class="status-toggle">
-                                                        <input type="checkbox" status_id="{{ $data->id }}" {{ $data->status==true ? 'checked="checked"' : '' }} id="post_status_{{ $loop -> index + 1 }}" class="check post-check">
-                                                        <label for="post_status_{{ $loop -> index + 1 }}" class="checktoggle">checkbox</label>
-                                                    </div>
-                                                </td>
                                                 <td>
 
-                                                    <a href="#" class="btn btn-sm btn-warning edit-tag-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                    {{--Delete Btn With Form--}}
-                                                    <form class="d-inline" action="{{ route('tag.destroy', $data->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button id="tag_delete_btn" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    </form>
-                                                    {{--/Delete Btn With Form--}}
+                                                    <a href="{{ route('post.trash.update', $data->id) }}" class="btn btn-sm btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i> Restore</a>
+                                                    <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Permanently Delete</a>
+
                                                 </td>
                                             </tr>
                                         @endforeach

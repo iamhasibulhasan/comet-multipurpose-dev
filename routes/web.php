@@ -37,6 +37,7 @@ Route::resource('post', 'App\Http\Controllers\PostController');
 Route::get('post/status/active/{id}', 'App\Http\Controllers\PostController@postStatusActive');
 Route::get('post/status/inactive/{id}', 'App\Http\Controllers\PostController@postStatusInactive');
 Route::get('post-trash', 'App\Http\Controllers\PostController@postTrash')->name('post.trash');
+Route::get('post-trash-update/{id}', 'App\Http\Controllers\PostController@postTrashUpdate')->name('post.trash.update');
 
 //Post Category Route
 Route::resource('category', 'App\Http\Controllers\CategoryController');

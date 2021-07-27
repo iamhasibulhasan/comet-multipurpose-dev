@@ -36,6 +36,24 @@ class PostController extends Controller
     }
 
     /**
+     * Post Trash Update
+     */
+
+    public function postTrashUpdate($id)
+    {
+        $trash_data = Post::find($id);
+
+        if($trash_data->trash == false){
+            $trash_data ->trash = true;
+        }else{
+            $trash_data ->trash = false;
+        }
+
+        $trash_data -> update();
+        return redirect() -> back()->with('danger', 'Post trashed successful.');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response

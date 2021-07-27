@@ -80,13 +80,8 @@
                                                 <td>
 
                                                     <a href="#" class="btn btn-sm btn-warning edit-tag-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                    {{--Delete Btn With Form--}}
-                                                    <form class="d-inline" action="{{ route('tag.destroy', $data->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button id="tag_delete_btn" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    </form>
-                                                    {{--/Delete Btn With Form--}}
+                                                    <a href="{{ route('post.trash.update', $data->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
                                                 </td>
                                             </tr>
                                         @endforeach
