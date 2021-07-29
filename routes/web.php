@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Auth::routes();
+//Frontend Routes
+Route::get('blog', [App\Http\Controllers\BlogPageController::class, 'showBlogPage']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');*/
 
+
+//Backend Routes
 /**
  * Admin Routes Here
  */
