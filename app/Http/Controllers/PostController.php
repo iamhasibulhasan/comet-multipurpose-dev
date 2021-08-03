@@ -107,8 +107,9 @@ class PostController extends Controller
             }
         }
 
-        if (strpos("https://vimeo.com/14529137", "vimeo")){
-            $video = str_replace("vimeo.com","player.vimeo.com/video","https://vimeo.com/14529137");
+
+        if (strpos($request->post_video, "vimeo.com")){
+            $video = str_replace("vimeo.com","player.vimeo.com/video", $request->post_video);
         }else{
             $video = str_replace('watch?v=','embed/', $request->post_video);
         }
