@@ -70,7 +70,13 @@
                                                 <td>{{ $data -> title }}</td>
                                                 <td>{{ $data -> user->name }}</td>
                                                 <td>{{ $featured_data -> post_type }}</td>
-                                                <td>{{ $featured_data -> post_type }}</td>
+                                                <td>
+                                                    <ul>
+                                                        @foreach($data->categories as $cat)
+                                                            <li>{{ $cat->name }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
                                                 <td>{{ $featured_data -> post_type }}</td>
                                                 <td>{{ $data -> created_at->diffForHumans() }}</td>
                                                 <td>

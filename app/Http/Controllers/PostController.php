@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -125,15 +126,20 @@ class PostController extends Controller
 
 
 
-        Post::create([
-            'title'     =>  $request->post_title,
-            'slug'     =>  Str::slug($request->post_title),
-            'featured'     =>  json_encode($post_featured),
-            'content'     =>  $request->post_content
+        $post_data = Post::create([
+            'title'         =>  $request->post_title,
+            'user_id'       =>  Auth::user()->id,
+            'slug'          =>  Str::slug($request->post_title),
+            'featured'      =>  json_encode($post_featured),
+            'content'       =>  $request->post_content
         ]);
 
-        return redirect()->back()->with('success', 'New post published !');
+//        category_post Table relation
+        $post_data->categories()->attach($request->post_category);
 //        return $request->all();
+
+        return redirect()->back()->with('success', 'New post published !');
+
     }
 
     /**
