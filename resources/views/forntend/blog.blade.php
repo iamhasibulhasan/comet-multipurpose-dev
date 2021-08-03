@@ -22,7 +22,7 @@
                         <article class="post-single">
                             <div class="post-info">
                                 <h2><a href="#">{{ $post->title }}</a></h2>
-                                <h6 class="upper"><span>By</span><a href="#"> Admin</a><span class="dot"></span><span>{{ $post->created_at->format('F d, Y') }}</span><span class="dot"></span><a href="#" class="post-tag">Startups</a></h6>
+                                <h6 class="upper"><span>By</span><a href="{{ $post->user_id }}"> {{ $post->user->name }}</a><span class="dot"></span><span>{{ $post->created_at->format('F d, Y') }}</span><span class="dot"></span><a href="#" class="post-tag">Startups</a></h6>
                             </div>
 
                             @if($featured->post_type == 'Image')

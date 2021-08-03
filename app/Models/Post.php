@@ -9,4 +9,9 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+//    User Model Relationship[one to one]
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }

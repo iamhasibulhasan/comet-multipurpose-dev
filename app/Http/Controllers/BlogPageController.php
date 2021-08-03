@@ -11,7 +11,7 @@ class BlogPageController extends Controller
 
     public function showBlogPage(){
 
-        $all_posts = Post::where('status', true)->latest()->get();
+        $all_posts = Post::where('status', true)->where('trash', false)->latest()->get();
         return view('forntend\blog', [
             'all_posts'     =>  $all_posts
         ]);
