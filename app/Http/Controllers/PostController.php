@@ -107,11 +107,17 @@ class PostController extends Controller
             }
         }
 
+        if (strpos("https://vimeo.com/14529137", "vimeo")){
+            $video = str_replace("vimeo.com","player.vimeo.com/video","https://vimeo.com/14529137");
+        }else{
+            $video = str_replace('watch?v=','embed/', $request->post_video);
+        }
+
         $post_featured = [
             'post_type'             =>  $request->post_type,
             'post_image'            =>  $unique_name_post_image,
             'post_gallery'          =>  $unique_name_post_gallery,
-            'post_video'            =>  $request->post_video,
+            'post_video'            =>  $video,
             'post_audio'            =>  $request->post_audio
         ];
 
