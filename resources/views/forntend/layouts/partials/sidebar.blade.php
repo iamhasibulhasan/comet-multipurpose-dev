@@ -2,9 +2,12 @@
     <div class="sidebar hidden-sm hidden-xs">
         <div class="widget">
             <h6 class="upper">Search blog</h6>
-            <form>
-                <input type="text" placeholder="Search.." class="form-control">
+
+            <form action="{{ route('post.search') }}" method="POST">
+                @csrf
+                <input name="search" type="text" placeholder="Search.." class="form-control">
             </form>
+
         </div>
         <!-- end of widget        -->
         <div class="widget">

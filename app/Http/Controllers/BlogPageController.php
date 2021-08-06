@@ -12,8 +12,21 @@ class BlogPageController extends Controller
     public function showBlogPage(){
 
         $all_posts = Post::where('status', true)->where('trash', false)->latest()->paginate(10);
-        return view('forntend\blog', [
+        return view('forntend.blog', [
             'all_posts'     =>  $all_posts
+        ]);
+    }
+
+    /**
+     * Blog Post Search
+     */
+    public function blogSearch(Request $request){
+
+        $search_key = $request->search;
+
+        $posts = Post::where('title', 'LIKE', '%'. $search_key .'%')->orWhere('content', 'LIKE', '%'. $search_key .'%')->latest()->paginate(10);
+        return view('forntend.blog-search', [
+            'all_posts'     =>  $posts
         ]);
     }
 }

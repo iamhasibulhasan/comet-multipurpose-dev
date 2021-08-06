@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 //Frontend Routes
 Route::get('blog', [App\Http\Controllers\BlogPageController::class, 'showBlogPage']);
+//Blog Post Search
+Route::post('blog', [App\Http\Controllers\BlogPageController::class, 'blogSearch'])->name('post.search');
 
 
 
