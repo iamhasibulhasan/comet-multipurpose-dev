@@ -123,7 +123,7 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label">Tag</label>
                                         <div class="col-lg-9">
-                                            <select style="width: 100%;" name="" class="post_tag_select" id="" multiple="multiple">
+                                            <select style="width: 100%;" name="tags[]" class="post_tag_select" id="" multiple="multiple">
                                                 @foreach( $all_tag as $tag )
                                                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                                 @endforeach

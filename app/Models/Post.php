@@ -18,4 +18,8 @@ class Post extends Model
     public function categories(){
         return $this->belongsToMany('App\Models\Category');
     }
+//    Tags relationship [many to many]
+    public function tags(){
+        return $this->belongsToMany('App\Models\Tag');
+    }
 }

@@ -136,6 +136,7 @@ class PostController extends Controller
 
 //        category_post Table relation
         $post_data->categories()->attach($request->post_category);
+        $post_data->tags()->attach($request->tags);
 //        return $request->all();
 
         return redirect()->back()->with('success', 'New post published !');

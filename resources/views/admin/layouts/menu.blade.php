@@ -61,7 +61,7 @@
                     <a href="settings.html"><i class="fe fe-vector"></i> <span>Settings</span></a>
                 </li>
             </ul>
-            {{ Route::currentRouteName() }}
+
         </div>
     </div>
 </div>
