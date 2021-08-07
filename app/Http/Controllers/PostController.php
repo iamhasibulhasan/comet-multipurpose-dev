@@ -129,7 +129,7 @@ class PostController extends Controller
         $post_data = Post::create([
             'title'         =>  $request->post_title,
             'user_id'       =>  Auth::user()->id,
-            'slug'          =>  str_replace(' ', '-', $request->post_title),
+            'slug'          =>  parent::getSlug($request->post_title),
             'featured'      =>  json_encode($post_featured),
             'content'       =>  $request->post_content
         ]);

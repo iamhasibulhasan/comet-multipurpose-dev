@@ -10,4 +10,13 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+
+    /**
+     * Make your own custom slug
+     */
+    protected function getSlug($data){
+        return str_replace(' ', '-', $data);
+    }
+
 }

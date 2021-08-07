@@ -12,7 +12,7 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -46,7 +46,7 @@ class TagController extends Controller
 
         Tag::create([
             'name'      =>  $request->name,
-            'slug'      =>  Str::slug($request->name)
+            'slug'      =>  parent::getSlug($request->name)
         ]);
 
         return redirect()->route('tag.index')->with('success', 'Tag added successful!');
@@ -91,7 +91,7 @@ class TagController extends Controller
         $edit_id = $request-> edit_id;
         $edit_data = Tag::find($edit_id);
         $edit_data -> name = $request -> name;
-        $edit_data -> slug = Str::slug($request -> name);
+        $edit_data -> slug = parent::getSlug($request -> name);
         $edit_data -> update();
         return redirect()->back()->with('success', 'Tag updated successful !');
     }

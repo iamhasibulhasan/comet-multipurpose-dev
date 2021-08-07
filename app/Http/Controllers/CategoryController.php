@@ -35,7 +35,7 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -45,7 +45,7 @@ class CategoryController extends Controller
 
         Category::create([
             'name'      =>  $request->name,
-            'slug'      =>  Str::slug($request->name)
+            'slug'      =>  parent::getSlug($request->name)
         ]);
 
         return redirect()->route('category.index')->with('success', 'Category added successful!');
@@ -90,7 +90,7 @@ class CategoryController extends Controller
         $edit_id = $request-> edit_id;
         $edit_data = Category::find($edit_id);
         $edit_data -> name = $request -> name;
-        $edit_data -> slug = Str::slug($request -> name);
+        $edit_data -> slug = parent::getSlug($request -> name);
         $edit_data -> update();
         return redirect()->back()->with('success', 'Category updated successful !');
     }

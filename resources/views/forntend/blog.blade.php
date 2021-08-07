@@ -24,7 +24,7 @@
                                 <h2><a href="#">{{ $post->title }}</a></h2>
                                 <h6 class="upper"><span>By</span><a href="{{ $post->user_id }}"> {{ $post->user->name }}</a><span class="dot"></span><span>{{ $post->created_at->format('F d, Y') }}</span><span class="dot"></span>
                                     @foreach($post->categories as $cat)
-                                        <a href="#" class="post-tag">{{ $cat->name }}</a>.
+                                        <a href="{{ route('post.cat.search', $cat->slug) }}" class="post-tag">{{ $cat->name }}</a>.
                                     @endforeach
                                 </h6>
                             </div>

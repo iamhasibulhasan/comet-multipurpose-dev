@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class BlogPageController extends Controller
@@ -46,5 +47,16 @@ class BlogPageController extends Controller
         $single_post = Post::where('slug', $slug)->first();
 
         return view('forntend.blog-single', compact('single_post'));
+    }
+
+    /**
+     * Post search by Tags
+     */
+    public function blogSearchByTag($slug){
+        $tags = Tag::where('slug', $slug)->first();
+
+        return view('forntend.tag-blog', [
+            'all_posts'     =>  $tags->posts
+        ]);
     }
 }

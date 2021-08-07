@@ -1,4 +1,9 @@
 @extends('forntend.layouts.app')
+@section('blog-title', $single_post->title)
+
+@foreach($single_post->categories as $cat)
+    @section('blog-cat', $cat->name)
+@endforeach
 
 @section('main-content')
     <section>
@@ -8,7 +13,11 @@
             <article class="post-single">
               <div class="post-info">
                 <h2><a href="#">{{ $single_post->title }}</a></h2>
-                <h6 class="upper"><span>By</span><a href="#"> Admin</a><span class="dot"></span><span>28 September 2015</span><span class="dot"></span><a href="#" class="post-tag">Startups</a></h6>
+                  <h6 class="upper"><span>By</span><a href="{{ $single_post->user_id }}"> {{ $single_post->user->name }}</a><span class="dot"></span><span>{{ $single_post->created_at->format('F d, Y') }}</span><span class="dot"></span>
+                      @foreach($single_post->tags as $tag)
+                          <a href="{{ route('post.tag.search', $tag->slug) }}" class="post-tag">{{ $tag->name }}</a>.
+                      @endforeach
+                  </h6>
               </div>
                   @php
                       $featured = json_decode( $single_post->featured );
@@ -114,9 +123,9 @@
             </div>
             <!-- end of comment form-->
           </div>
+            @include('forntend.layouts.partials.sidebar')
         </div>
         <!-- end of row-->
-          @include('forntend.layouts.partials.sidebar')
       </div>
     </section>
 @endsection

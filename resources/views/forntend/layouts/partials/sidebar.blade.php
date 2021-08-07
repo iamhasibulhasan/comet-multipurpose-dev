@@ -31,7 +31,7 @@
             <h6 class="upper">Popular Tags</h6>
             <div class="tags clearfix">
                 @foreach($all_tags as $tags)
-                    <a href="{{ $tags->id }}">{{ $tags->name }}</a>
+                    <a href="{{ route('post.tag.search', $tags->slug) }}">{{ $tags->name }}</a>
                 @endforeach
             </div>
         </div>

@@ -1,5 +1,7 @@
 @extends('forntend.layouts.app')
 
+
+
 @section('main-content')
 
 
@@ -9,12 +11,7 @@
                 <div class="col-md-8">
                     <div class="blog-posts">
 
-
-
-
-
                         @foreach( $all_posts as $post )
-
                             @php
                                 $featured = json_decode( $post->featured );
                             @endphp
@@ -23,8 +20,8 @@
                             <div class="post-info">
                                 <h2><a href="#">{{ $post->title }}</a></h2>
                                 <h6 class="upper"><span>By</span><a href="{{ $post->user_id }}"> {{ $post->user->name }}</a><span class="dot"></span><span>{{ $post->created_at->format('F d, Y') }}</span><span class="dot"></span>
-                                    @foreach($post->categories as $cat)
-                                        <a href="#" class="post-tag">{{ $cat->name }}</a>.
+                                    @foreach($post->tags as $tag)
+                                        <a href="{{ route('post.tag.search', $tag->slug) }}" class="post-tag">{{ $tag->name }}</a>.
                                     @endforeach
                                 </h6>
                             </div>
@@ -63,8 +60,6 @@
                         </article>
                         <!-- end of article-->
                         @endforeach
-
-
 
                     </div>
 
