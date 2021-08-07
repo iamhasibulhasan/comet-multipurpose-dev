@@ -37,4 +37,14 @@ class BlogPageController extends Controller
             'all_posts'     =>  $cats->posts
         ]);
     }
+
+    /**
+     * Sing Blog Show
+     */
+
+    public function blogSingle($slug){
+        $single_post = Post::where('slug', $slug)->first();
+
+        return view('forntend.blog-single', compact('single_post'));
+    }
 }

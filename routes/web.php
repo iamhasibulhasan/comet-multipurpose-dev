@@ -22,6 +22,7 @@ Route::get('blog', [App\Http\Controllers\BlogPageController::class, 'showBlogPag
 //Blog Post Search
 Route::post('blog', [App\Http\Controllers\BlogPageController::class, 'blogSearch'])->name('post.search');
 Route::get('blog/category/{slug}', [App\Http\Controllers\BlogPageController::class, 'blogSearchByCat'])->name('post.cat.search');
+Route::get('blog/{slug}', [App\Http\Controllers\BlogPageController::class, 'blogSingle'])->name('post.single');
 
 
 

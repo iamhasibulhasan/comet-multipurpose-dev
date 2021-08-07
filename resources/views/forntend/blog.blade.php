@@ -58,7 +58,7 @@
                             @endif
                             <div class="post-body">
                                 {!! Str::of(htmlspecialchars_decode($post->content))->words(25) !!}
-                                <p><a href="#" class="btn btn-color btn-sm">Read More</a></p>
+                                <p><a href="{{ route('post.single', $post->slug) }}" class="btn btn-color btn-sm">Read More</a></p>
                             </div>
                         </article>
                         <!-- end of article-->
