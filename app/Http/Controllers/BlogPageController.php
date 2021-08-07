@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,13 @@ class BlogPageController extends Controller
         $posts = Post::where('title', 'LIKE', '%'. $search_key .'%')->orWhere('content', 'LIKE', '%'. $search_key .'%')->latest()->paginate(10);
         return view('forntend.blog-search', [
             'all_posts'     =>  $posts
+        ]);
+    }
+
+    public function blogSearchByCat($slug){
+        $cats = Category::where('slug', $slug)->first();
+        return view('forntend.category-blog', [
+            'all_posts'     =>  $cats->posts
         ]);
     }
 }

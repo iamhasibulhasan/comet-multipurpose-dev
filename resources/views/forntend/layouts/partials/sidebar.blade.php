@@ -20,7 +20,7 @@
                     $all_latest_post = \App\Models\Post::where('status',true)->take(5)->latest()->get();
                 @endphp
                 @foreach($all_categories as $category)
-                    <li><a href="{{ $category->id }}" >{{ $category->name }}</a>
+                    <li><a href="{{ route('post.cat.search', $category->slug) }}" >{{ $category->name }}</a>
                     </li>
                 @endforeach
 
