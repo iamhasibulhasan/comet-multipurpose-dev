@@ -37,11 +37,13 @@
         </div>
         <!-- end of widget      -->
         <div class="widget">
-            <h6 class="upper">Latest Posts</h6>
+            <h6 class="upper">Popular Posts</h6>
             <ul class="nav">
-
-                @foreach($all_latest_post as $post)
-                    <li><a href="{{ $post->id }}">{{ $post->title }}<i class="ti-arrow-right"></i><span>{{ $post->created_at->format('F d, Y') }}</span></a>
+                @php
+                    $all_post = App\Models\Post::where('status', true)->orderBy('views', 'DESC')->take(5)->latest()->get();
+                @endphp
+                @foreach($all_post as $post)
+                    <li><a href="{{ route('post.single', $post->slug) }}">{{ $post->title }}<i class="ti-arrow-right"></i><span>{{ $post->created_at->format('F d, Y') }}</span></a>
                     </li>
                 @endforeach
             </ul>

@@ -33,28 +33,41 @@ Route::get('blog/tag/{slug}', [App\Http\Controllers\BlogPageController::class, '
  */
 Route::get('/admin/login', [App\Http\Controllers\AdminController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::get('/admin/register', [App\Http\Controllers\AdminController::class, 'showAdminRegisterForm'])->name('admin.register');
-Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'showAdminDashboard'])->name('admin.dashboard');
 
 Route::post('/admin/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('admin.login');
 Route::post('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('admin.logout');
 Route::post('/admin/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('admin.register');
 
-//Post Route
-Route::resource('post', 'App\Http\Controllers\PostController');
-Route::get('post/status/active/{id}', 'App\Http\Controllers\PostController@postStatusActive');
-Route::get('post/status/inactive/{id}', 'App\Http\Controllers\PostController@postStatusInactive');
-Route::get('post-trash', 'App\Http\Controllers\PostController@postTrash')->name('post.trash');
-Route::get('post-trash-update/{id}', 'App\Http\Controllers\PostController@postTrashUpdate')->name('post.trash.update');
 
-//Post Category Route
-Route::resource('category', 'App\Http\Controllers\CategoryController');
-Route::get('category/status/active/{id}', 'App\Http\Controllers\CategoryController@categoryStatusActive');
-Route::get('category/status/inactive/{id}', 'App\Http\Controllers\CategoryController@categoryStatusInactive');
+/**
+ * Auth Route[Middleware]
+ * when admin login then access these pages
+ */
+
+Route::group(['middleware' => 'auth'], function(){
+
+    //    Admin Dashboard Access
+    Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'showAdminDashboard'])->name('admin.dashboard');
 
 
-//Post Tag Route
-Route::resource('tag', 'App\Http\Controllers\TagController');
-Route::get('tag/status/active/{id}', 'App\Http\Controllers\TagController@tagStatusActive');
-Route::get('tag/status/inactive/{id}', 'App\Http\Controllers\TagController@tagStatusInactive');
+    //Post Route
+    Route::resource('post', 'App\Http\Controllers\PostController');
+    Route::get('post/status/active/{id}', 'App\Http\Controllers\PostController@postStatusActive');
+    Route::get('post/status/inactive/{id}', 'App\Http\Controllers\PostController@postStatusInactive');
+    Route::get('post-trash', 'App\Http\Controllers\PostController@postTrash')->name('post.trash');
+    Route::get('post-trash-update/{id}', 'App\Http\Controllers\PostController@postTrashUpdate')->name('post.trash.update');
+
+    //Post Category Route
+    Route::resource('category', 'App\Http\Controllers\CategoryController');
+    Route::get('category/status/active/{id}', 'App\Http\Controllers\CategoryController@categoryStatusActive');
+    Route::get('category/status/inactive/{id}', 'App\Http\Controllers\CategoryController@categoryStatusInactive');
+
+
+    //Post Tag Route
+    Route::resource('tag', 'App\Http\Controllers\TagController');
+    Route::get('tag/status/active/{id}', 'App\Http\Controllers\TagController@tagStatusActive');
+    Route::get('tag/status/inactive/{id}', 'App\Http\Controllers\TagController@tagStatusInactive');
+
+});
 
 

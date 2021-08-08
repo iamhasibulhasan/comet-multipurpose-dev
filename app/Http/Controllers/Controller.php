@@ -19,4 +19,15 @@ class Controller extends BaseController
         return str_replace(' ', '-', $data);
     }
 
+    /**
+     * Make your custom video link [youtube & vimeo]
+     */
+
+    protected function getEmbed($link){
+        if (strpos($link, "vimeo.com")){
+            return str_replace("vimeo.com","player.vimeo.com/video", $link);
+        }else{
+            return str_replace('watch?v=','embed/', $link);
+        }
+    }
 }

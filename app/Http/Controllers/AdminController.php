@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     /**
+     * Setup Middleware
+     */
+
+    public function __construct(){
+        $this->middleware('guest')->except('showAdminDashboard');
+    }
+
+    /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      * Admin Login Form Show
      */

@@ -21,7 +21,7 @@
 
                         <article class="post-single">
                             <div class="post-info">
-                                <h2><a href="#">{{ $post->title }}</a></h2>
+                                <h2><a href="{{ route('post.single', $post->slug) }}">{{ $post->title }}</a></h2>
                                 <h6 class="upper"><span>By</span><a href="{{ $post->user_id }}"> {{ $post->user->name }}</a><span class="dot"></span><span>{{ $post->created_at->format('F d, Y') }}</span><span class="dot"></span>
                                     @foreach($post->categories as $cat)
                                         <a href="#" class="post-tag">{{ $cat->name }}</a>.

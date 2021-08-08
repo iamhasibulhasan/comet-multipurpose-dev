@@ -45,8 +45,19 @@ class BlogPageController extends Controller
 
     public function blogSingle($slug){
         $single_post = Post::where('slug', $slug)->first();
-
+        $this->viewCount($single_post->id);
         return view('forntend.blog-single', compact('single_post'));
+    }
+
+    /**
+     * Post view count
+     */
+    private function viewCount($post_id){
+        $post = Post::find($post_id);
+        $old_views = $post->views;
+        $post->views = $old_views + 1;
+        $post->update();
+
     }
 
     /**
