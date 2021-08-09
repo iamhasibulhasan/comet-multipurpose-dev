@@ -182,6 +182,24 @@ class PostController extends Controller
     public function destroy($id)
     {
         $delete_data = Post::find($id);
+
+        $featured = json_decode( $delete_data->featured );
+
+        if($featured->post_type == 'Image'){
+            if (file_exists('media/posts/'. $featured->post_image)) {
+                unlink('media/posts/'. $featured->post_image);
+            }
+        }elseif ($featured->post_type == 'Gallery'){
+            foreach ($featured->post_gallery as $photo){
+                if (file_exists('media/posts/'. $photo)) {
+                    unlink('media/posts/'. $photo);
+                }
+            }
+        }
+
+//        Detach cat_post, post_tag
+        $delete_data->categories()->detach($delete_data->post_category);
+        $delete_data->tags()->detach($delete_data->tags);
         $delete_data -> delete();
         return redirect()->back()->with('success', 'Data deleted permanently.');
     }
