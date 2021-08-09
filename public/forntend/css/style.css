@@ -4885,3 +4885,9 @@ footer.dark p {
     transform: scale(1);
   }
 }
+
+
+/*Replay Comment*/
+.reply-box{
+    display: none;
+}

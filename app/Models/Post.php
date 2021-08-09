@@ -22,4 +22,10 @@ class Post extends Model
     public function tags(){
         return $this->belongsToMany('App\Models\Tag');
     }
+
+    // Get all comments
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+    }
 }

@@ -91,6 +91,6 @@ class RegisterController extends Controller
         Notification::send($user, new AccountConfirmationNotification($user));
 
         Auth::logout();
-        return redirect()->route('admin/login');
+        return redirect()->route('admin.login');
     }
 }

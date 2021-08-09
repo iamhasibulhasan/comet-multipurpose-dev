@@ -39,6 +39,10 @@ Route::post('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, 
 Route::post('/admin/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('admin.register');
 
 
+
+//Blog Post Comments Route
+Route::post('blog-post-comments', [App\Http\Controllers\CommentController::class, 'postComment'])->name('blog.post.comment');
+Route::post('blog-post-reply', [App\Http\Controllers\CommentController::class, 'blogCommentReply'])->name('blog.post.reply');
 /**
  * Auth Route[Middleware]
  * when admin login then access these pages

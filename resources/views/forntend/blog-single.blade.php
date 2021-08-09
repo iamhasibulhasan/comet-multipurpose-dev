@@ -56,72 +56,103 @@
               </div>
             </article>
             <!-- end of article-->
+
+
             <div id="comments">
-              <h5 class="upper">3 Comments</h5>
+              <h5 class="upper">{{ $single_post->comments->count() }} Comments</h5>
               <ul class="comments-list">
-                <li>
-                  <div class="comment">
-                    <div class="comment-pic">
-                      <img src="forntend/images/team/1.jpg" alt="" class="img-circle">
-                    </div>
-                    <div class="comment-text">
-                      <h5 class="upper">Jesse Pinkman</h5><span class="comment-date">Posted on 29 September at 10:41</span>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime distinctio et quam possimus velit dolor sunt nisi neque, harum, dolores rem incidunt, esse ipsa nam facilis eum doloremque numquam veniam.</p><a href="#" class="comment-reply">Reply</a>
-                    </div>
-                  </div>
-                  <ul class="children">
-                    <li>
-                      <div class="comment">
-                        <div class="comment-pic">
-                          <img src="forntend/images/team/2.jpg" alt="" class="img-circle">
-                        </div>
-                        <div class="comment-text">
-                          <h5 class="upper">Arya Stark</h5><span class="comment-date">Posted on 29 September at 10:41</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque porro quae harum dolorem exercitationem voluptas illum ipsa sed hic, cum corporis autem molestias suscipit, illo laborum, vitae, dicta ullam minus.</p><a href="#"
-                          class="comment-reply">Reply</a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <div class="comment">
-                    <div class="comment-pic">
-                      <img src="forntend/images/team/3.jpg" alt="" class="img-circle">
-                    </div>
-                    <div class="comment-text">
-                      <h5 class="upper">Rust Cohle</h5><span class="comment-date">Posted on 29 September at 10:41</span>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deleniti sit beatae natus! Beatae velit labore, numquam excepturi, molestias reiciendis, ipsam quas iure distinctio quia, voluptate expedita autem explicabo illo.</p>
-                      <a
-                      href="#" class="comment-reply">Reply</a>
-                    </div>
-                  </div>
-                </li>
+                @foreach($single_post->comments as $comment)
+                    @if($comment->comment_id == null)
+                        <li>
+                          <div class="comment">
+                            <div class="comment-pic">
+                              <img src="{{ URL::to('forntend/images/team/1.jpg') }}" alt="" class="img-circle">
+                            </div>
+                            <div class="comment-text">
+                              <h5 class="upper">{{ $comment->user->name }}</h5><span class="comment-date">Posted on
+                                    {{ date('d F,Y', strtotime($comment->created_at)) }} at
+                                    {{ date('g:i', strtotime($comment->created_at)) }}</span>
+                              <p>{{ $comment->text }}</p>
+
+                                @guest
+                                    <p>Please <a href="{{ route('admin.login') }}">login</a> first for reply.</p>
+                                @else
+                                    <a href="#" class="comment-reply comment_reply_btn" c_id="{{ $comment->id }}" >Reply</a>
+                                    <div class="reply-box reply-box-{{ $comment->id }}">
+                                        <form action="{{ route('blog.post.reply') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input name="post_id" type="hidden" class="form-control" value="{{ $single_post->id }}">
+                                                <input name="comment_id" type="hidden" class="form-control" value="{{ $comment->id }}">
+                                                <textarea name="reply_text" placeholder="Comment" class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-submit text-right">
+                                                <button type="submit" class="btn btn-color-out">Replay</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @endguest
+
+                            </div>
+                          </div>
+                            @php
+                                $replies = App\Models\Comment::where('comment_id', '!=', null )-> where('comment_id', $comment->id)->get();
+                            @endphp
+                        @foreach($replies as $reply)
+                          <ul class="children">
+                            <li>
+                              <div class="comment">
+                                <div class="comment-pic">
+                                  <img src="forntend/images/team/2.jpg" alt="" class="img-circle">
+                                </div>
+                                <div class="comment-text">
+                                  <h5 class="upper">{{ $reply->user->name }}</h5><span class="comment-date">Posted on
+                                    {{ date('d F,Y', strtotime($reply->created_at)) }} at
+                                    {{ date('g:i', strtotime($reply->created_at)) }}</span>
+                                  <p>{{ $reply->text }}</p>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        @endforeach
+                        </li>
+                      @endif
+               @endforeach
+
               </ul>
             </div>
             <!-- end of comments-->
-            <div id="respond">
-              <h5 class="upper">Leave a comment</h5>
-              <div class="comment-respond">
-                <form class="comment-form">
-                  <div class="form-double">
-                    <div class="form-group">
-                      <input name="author" type="text" placeholder="Name" class="form-control">
-                    </div>
-                    <div class="form-group last">
-                      <input name="email" type="text" placeholder="Email" class="form-control">
-                    </div>
+
+              @guest
+                <p>Please <a href="{{ route('admin.login') }}">login</a> first before leave a comment.</p>
+              @else
+                <div id="respond">
+                  <h5 class="upper">Leave a comment</h5>
+                  <div class="comment-respond">
+                    <form class="comment-form" action="{{ route('blog.post.comment') }}" method="POST">
+                        @csrf
+                      <div class="form-double">
+{{--                        <div class="form-group">--}}
+{{--                          <input name="author" type="text" placeholder="Name" class="form-control">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group last">--}}
+{{--                          <input name="email" type="text" placeholder="Email" class="form-control">--}}
+{{--                        </div>--}}
+                      </div>
+                      <div class="form-group">
+                          <input name="post_id" type="hidden" class="form-control" value="{{ $single_post->id }}">
+                        <textarea name="comments" placeholder="Comment" class="form-control"></textarea>
+                      </div>
+                      <div class="form-submit text-right">
+                        <button type="submit" class="btn btn-color-out">Post Comment</button>
+                      </div>
+                    </form>
                   </div>
-                  <div class="form-group">
-                    <textarea placeholder="Comment" class="form-control"></textarea>
-                  </div>
-                  <div class="form-submit text-right">
-                    <button type="button" class="btn btn-color-out">Post Comment</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <!-- end of comment form-->
+                </div>
+                <!-- end of comment form-->
+              @endguest
+
+
           </div>
             @include('forntend.layouts.partials.sidebar')
         </div>
