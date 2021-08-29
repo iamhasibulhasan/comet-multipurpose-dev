@@ -93,7 +93,7 @@
                                                 </td>
                                                 <td>
 
-                                                    <a href="#" class="btn btn-sm btn-warning edit-tag-btn" edit_id="{{ $data->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('post.edit',$data->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                     <a href="{{ route('post.trash.update', $data->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 
                                                 </td>

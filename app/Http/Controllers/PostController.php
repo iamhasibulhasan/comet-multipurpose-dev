@@ -154,11 +154,18 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|int
      */
     public function edit($id)
     {
-        //
+        $all_category = Category::all();
+        $all_tag = Tag::all();
+        $data = Post::find($id);
+        return view('admin.post.edit',[
+            'all_category'  =>  $all_category,
+            'all_tag'       =>  $all_tag,
+            'edit_data'     =>  $data
+        ]);
     }
 
     /**
@@ -166,11 +173,12 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Request|\Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        return $id;
+
     }
 
     /**
