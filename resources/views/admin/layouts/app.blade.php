@@ -27,7 +27,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
-
+    <!-- Datatable jQuery CSS -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
     <!--[if lt IE 9]>
     <script src="{{ asset('admin/assets/js/html5shiv.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/respond.min.js') }}"></script>
@@ -63,7 +64,8 @@
 <!-- Custom JS -->
 <script src="{{ asset('admin/assets/js/script.js') }}"></script>
 <script src="{{ asset('admin/assets/js/comet/custom.js') }}"></script>
-
+<!-- Datatable jQuery JS -->
+<script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

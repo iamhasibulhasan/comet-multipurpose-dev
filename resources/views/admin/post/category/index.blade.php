@@ -44,7 +44,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped mb-0">
+                                    <table id="blog_cat_tbl" class="table table-striped mb-0">
                                         <thead>
                                         <tr>
                                             <th>#SI</th>

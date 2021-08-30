@@ -245,7 +245,8 @@
             }
         });
 
-
+    //Blog Category Table Convert into Datatable
+        $('#blog_cat_tbl').DataTable();
 
 
     });

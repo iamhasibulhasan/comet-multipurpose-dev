@@ -29,7 +29,7 @@ class {{ class }} extends Controller
      */
     public function create()
     {
-        //
+        return view('view.name');
     }
 
     /**
@@ -40,7 +40,15 @@ class {{ class }} extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+                    'name'     =>  'required',
+                    'cell'   =>  ['required', 'starts_with: +8801, 8801, 01']
+                ]);
+        {{ namespacedModel }}:create([
+            'name'          =>  $request->name,
+        ]);
+
+        return redirect()->back()->with('success', 'your message');
     }
 
     /**
