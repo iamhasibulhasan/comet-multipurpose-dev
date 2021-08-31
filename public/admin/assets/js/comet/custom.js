@@ -249,6 +249,64 @@
         $('#blog_cat_tbl').DataTable();
 
 
+
+    //Product brand table
+        $('#product_brand_tbl').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax: {
+                url: 'brand'
+            },
+            columns:[
+                {
+                    data:'id',
+                    name:'id'
+                },
+                {
+                    data:'name',
+                    name:'name'
+                },
+                {
+                    data:'slug',
+                    name:'slug'
+                },
+                {
+                    data:'logo',
+                    name:'logo',
+                    render:function (data, type, full, meta){
+                        return `<img style="height: 50px;width: 50px;" src="media/products/brands/${data}">`;
+                    }
+                },
+                {
+                    data:'status',
+                    name:'status'
+                },
+                {
+                    data:'action',
+                    name:'action'
+                }
+            ]
+        });
+        //Add product brand
+        $(document).on('submit', '#product_brand_form', function (e){
+            e.preventDefault();
+            $.ajax({
+                url:'brand',
+                method:'POST',
+                data:new FormData(this),
+                contentType:false,
+                processData:false,
+                success:function (data){
+                    $('#product_brand_form')[0].reset();
+                    $('#add_new_brand_modal').modal('hide');
+                    $('#product_brand_tbl').DataTable().ajax.reload();
+                }
+
+            });
+        });
+
+
+
     });
 
 })(jQuery)

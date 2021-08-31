@@ -72,6 +72,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('tag/status/active/{id}', 'App\Http\Controllers\TagController@tagStatusActive');
     Route::get('tag/status/inactive/{id}', 'App\Http\Controllers\TagController@tagStatusInactive');
 
+
+    //Product Brand Route
+    Route::resource('brand', 'App\Http\Controllers\BrandController');
 });
 
 
