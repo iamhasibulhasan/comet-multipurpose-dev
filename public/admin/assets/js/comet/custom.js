@@ -279,7 +279,15 @@
                 },
                 {
                     data:'status',
-                    name:'status'
+                    name:'status',
+                    render:function (data, type, full, meta){
+                        return `
+                            <div class="status-toggle">
+                                <input ${data == 1 ? 'checked="checked"':''} value="${data}" type="checkbox" status_id="${full.id}" id="brand_status_${full.id}" class="check brand-check">
+                                <label for="brand_status_${full.id}" class="checktoggle">checkbox</label>
+                            </div>
+                         `;
+                    }
                 },
                 {
                     data:'action',
@@ -305,7 +313,19 @@
             });
         });
 
-
+    //Product brand status
+        $(document).on('change', 'input.brand-check', function (){
+            let status_id = $(this).attr('status_id');
+            $.ajax({
+                url: 'brand-status/'+ status_id,
+                success: function (data){
+                    swal({
+                        text: data,
+                        icon: "success",
+                    })
+                }
+            });
+        });
 
     });
 

@@ -99,4 +99,18 @@ class BrandController extends Controller
     {
         //
     }
+
+//    Product brand status update
+    public function statusUpdate($id){
+        $status = Brand::find($id);
+        if ($status->status == true){
+            $status->status = false;
+            $status->update();
+            return "Brand deactivate successful.";
+        }else{
+            $status->status = true;
+            $status->update();
+            return "Brand activate successful.";
+        }
+    }
 }
