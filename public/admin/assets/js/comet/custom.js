@@ -25,10 +25,13 @@
                 $.ajax({
                     url: 'category/status/inactive/' + id,
                     success:function (data){
-                        swal({
+                        Swal.fire({
+                            position: 'top-end',
                             title: "Inactive !",
                             text: "Status inactivate successful!",
                             icon: "warning",
+                            showConfirmButton: false,
+                            timer: 1500
                         }).then((value)=>{
                             location.reload();
                         });
@@ -38,10 +41,13 @@
                 $.ajax({
                     url: 'category/status/active/' + id,
                     success:function (data){
-                        swal({
+                        Swal.fire({
+                            position: 'top-end',
                             title: "Activate !",
                             text: "Status activate successful!",
                             icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
                         }).then((value)=>{
                             location.reload();
                         });
@@ -136,10 +142,13 @@
                 $.ajax({
                     url: 'tag/status/inactive/' + id,
                     success:function (data){
-                        swal({
+                        Swal.fire({
+                            position: 'top-end',
                             title: "Inactive !",
                             text: "Status inactivate successful!",
                             icon: "warning",
+                            showConfirmButton: false,
+                            timer: 1500
                         }).then((value)=>{
                             location.reload();
                         });
@@ -149,10 +158,15 @@
                 $.ajax({
                     url: 'tag/status/active/' + id,
                     success:function (data){
-                        swal({
+
+
+                        Swal.fire({
+                            position: 'top-end',
                             title: "Activate !",
                             text: "Status activate successful!",
                             icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
                         }).then((value)=>{
                             location.reload();
                         });
@@ -220,10 +234,14 @@
                 $.ajax({
                     url: 'post/status/inactive/' + id,
                     success:function (data){
-                        swal({
+
+                        Swal.fire({
+                            position: 'top-end',
                             title: "Inactive !",
                             text: "Status inactivate successful!",
                             icon: "warning",
+                            showConfirmButton: false,
+                            timer: 1500
                         }).then((value)=>{
                             location.reload();
                         });
@@ -233,10 +251,14 @@
                 $.ajax({
                     url: 'post/status/active/' + id,
                     success:function (data){
-                        swal({
+
+                        Swal.fire({
+                            position: 'top-end',
                             title: "Activate !",
                             text: "Status activate successful!",
                             icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
                         }).then((value)=>{
                             location.reload();
                         });
@@ -319,13 +341,49 @@
             $.ajax({
                 url: 'brand-status/'+ status_id,
                 success: function (data){
-                    swal({
-                        text: data,
-                        icon: "success",
-                    })
+                    Swal.fire({
+                        position: 'top-end',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#product_brand_tbl').DataTable().ajax.reload();
                 }
             });
         });
+
+    //    Product brand delete
+    $(document).on('click', 'a.brand-del', function (e){
+        e.preventDefault();
+        let id = $(this).attr('del-brand-id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'brand-delete/'+ id,
+                    success:function (data){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: data+' has been deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        $('#product_brand_tbl').DataTable().ajax.reload();
+                    }
+                });
+
+            }
+        })
+
+    });
 
     });
 

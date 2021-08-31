@@ -15,9 +15,9 @@ class BrandController extends Controller
     public function index()
     {
         if (request()->ajax()){
-            return datatables()->of(Brand::latest()->get())->addColumn('action', function (){
-                $output = '<a class="btn btn-warning btn-sm" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
-                $output .= ' <a class="btn btn-danger btn-sm" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+            return datatables()->of(Brand::latest()->get())->addColumn('action', function ($data){
+                $output = '<a class="btn btn-warning btn-sm brand-edit" edit-brand-id="'.$data['id'].'" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+                $output .= ' <a class="btn btn-danger btn-sm brand-del" del-brand-id="'.$data['id'].'" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                 return $output;
             })->rawColumns(['action'])->make(true);
         }
@@ -112,5 +112,17 @@ class BrandController extends Controller
             $status->update();
             return "Brand activate successful.";
         }
+    }
+//    Product brand delete
+    public function productBrandDelete($id){
+        $delete_data = Brand::find($id);
+        $brnad_name = $delete_data->name;
+        $logo = $delete_data->logo;
+        if (file_exists('media/products/brands/'.$logo)){
+            unlink('media/products/brands/'.$logo);
+        }
+        $delete_data->delete();
+        return $brnad_name;
+
     }
 }
