@@ -125,4 +125,9 @@ class BrandController extends Controller
         return $brnad_name;
 
     }
+//    Product brand edit
+    public function productBrandEdit($id){
+
+        return Brand::find($id);
+    }
 }

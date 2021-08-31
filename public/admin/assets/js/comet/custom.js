@@ -385,6 +385,27 @@
 
     });
 
+    //Edit product modal
+        $(document).on('click', 'a.brand-edit', function (e){
+            e.preventDefault();
+            let id = $(this).attr('edit-brand-id');
+            $.ajax({
+                url: 'brand-edit/'+ id,
+                success: function (data){
+                    $('#product_brand_logo').val('media/products/brands/'+ data.logo);
+                    $('#edit_product_brand_modal form input[name="name"]').val(data.name);
+                    $('#edit_product_brand_modal form input[name="edit_id"]').val(data.id);
+                    $('#edit_product_brand_modal form input[name="old_logo"]').val(data.logo);
+                    $('#product_brand_logo').attr('src', 'media/products/brands/'+ data.logo);
+                    $('#edit_product_brand_modal').modal('show');
+                }
+            });
+
+        });
+
+
+
+
     });
 
 })(jQuery)

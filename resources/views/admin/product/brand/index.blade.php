@@ -107,7 +107,7 @@
 
     <!-- Edit product brand modal -->
 
-    <div class="modal fade" id="edit_brand_modal">
+    <div class="modal fade" id="edit_product_brand_modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -116,13 +116,18 @@
                     </button>
                     <h3>Edit category</h3>
                     <hr>
-                    <form action="{{ route('category.update', 1) }}" method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="form-group">
                             <label for="">Name</label>
                             <input name="name" type="text" class="form-control">
                             <input name="edit_id" type="hidden" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <img style="width: 150px;" id="product_brand_logo" alt=""><br>
+                            <label for="new_lo">Logo</label>
+                            <input id="new_lo" name="new_logo" type="file" class="form-control">
+                            <input name="old_logo" type="hidden" class="form-control">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-block">

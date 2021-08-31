@@ -77,6 +77,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('brand', 'App\Http\Controllers\BrandController');
     Route::get('brand-status/{id}', 'App\Http\Controllers\BrandController@statusUpdate')->name('brand.status');
     Route::get('brand-delete/{id}', 'App\Http\Controllers\BrandController@productBrandDelete')->name('brand.delete');
+    Route::get('brand-edit/{id}', 'App\Http\Controllers\BrandController@productBrandEdit')->name('brand.edit');
 });
 
 
