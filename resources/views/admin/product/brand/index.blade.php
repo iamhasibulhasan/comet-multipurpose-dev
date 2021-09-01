@@ -116,8 +116,9 @@
                     </button>
                     <h3>Edit category</h3>
                     <hr>
-                    <form method="POST" enctype="multipart/form-data">
+                    <form id="edit_product_brand_form" form-no="" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label for="">Name</label>
                             <input name="name" type="text" class="form-control">

@@ -395,6 +395,7 @@
                     $('#product_brand_logo').val('media/products/brands/'+ data.logo);
                     $('#edit_product_brand_modal form input[name="name"]').val(data.name);
                     $('#edit_product_brand_modal form input[name="edit_id"]').val(data.id);
+                    $('#edit_product_brand_modal form').attr('form-no', data.id);
                     $('#edit_product_brand_modal form input[name="old_logo"]').val(data.logo);
                     $('#product_brand_logo').attr('src', 'media/products/brands/'+ data.logo);
                     $('#edit_product_brand_modal').modal('show');
@@ -403,7 +404,30 @@
 
         });
 
+        //Porduct brand update
+        $(document).on('submit', '#edit_product_brand_form', function (e){
+            e.preventDefault();
 
+            let id = $(this).attr('form-no');
+            $.ajax({
+                url: 'brand/'+ id,
+                method: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data){
+                    Swal.fire({
+                        position: 'top-end',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#product_brand_tbl').DataTable().ajax.reload();
+                    $('#edit_product_brand_modal').modal('hide');
+                }
+            });
+
+        });
 
 
     });

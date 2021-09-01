@@ -86,7 +86,19 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $file_name= $request->old_logo;
+        if ($request->hasFile('new_logo')){
+            $img = $request->file('new_logo');
+            $file_name = md5(time().rand()).'.'.$img->getClientOriginalExtension();
+            $img->move(public_path('media/products/brands/'), $file_name);
+        }
+
+        $brand->name = $request->name;
+        $brand->slug = $this->getSlug($request->name);
+        $brand->logo = $file_name;
+        $brand->update();
+        return 'Brand updated successful!';
+
     }
 
     /**
