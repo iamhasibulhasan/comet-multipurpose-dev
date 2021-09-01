@@ -78,6 +78,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('brand-status/{id}', 'App\Http\Controllers\BrandController@statusUpdate')->name('brand.status');
     Route::get('brand-delete/{id}', 'App\Http\Controllers\BrandController@productBrandDelete')->name('brand.delete');
     Route::get('brand-edit/{id}', 'App\Http\Controllers\BrandController@productBrandEdit')->name('brand.edit');
+
+//    Product Tag Route
+    Route::resource('ptag', 'App\Http\Controllers\ProductTagController');
+    Route::get('ptag-status/{id}', 'App\Http\Controllers\ProductTagController@statusUpdate')->name('ptag.status');
+    Route::get('ptag-delete/{id}', 'App\Http\Controllers\ProductTagController@productTagDelete')->name('ptag.delete');
+    Route::get('ptag-edit/{id}', 'App\Http\Controllers\ProductTagController@productTagEdit')->name('ptag.edit');
+
 });
 
 

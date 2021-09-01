@@ -429,6 +429,157 @@
 
         });
 
+    //    Product Tag Table
+        $('#product_tag_tbl').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: 'ptag',
+            },
+            columns:[
+                {
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'slug',
+                    name: 'slug'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                },
+                {
+                    data:'status',
+                    name:'status',
+                    render:function (data, type, full, meta){
+                        return `
+                            <div class="status-toggle">
+                                <input ${data == 1 ? 'checked="checked"':''} value="${data}" type="checkbox" status_id="${full.id}" id="ptag_status_${full.id}" class="check ptag-check">
+                                <label for="ptag_status_${full.id}" class="checktoggle">checkbox</label>
+                            </div>
+                         `;
+                    }
+                },
+                {
+                    data:'action',
+                    name:'action'
+                }
+            ]
+        });
+
+    //    Product add new tag
+        $(document).on('submit', '#product_tag_form', function (e){
+            e.preventDefault();
+            $.ajax({
+                url: 'ptag/',
+                method: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data){
+                    Swal.fire({
+                        position: 'top-end',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#product_tag_form')[0].reset();
+                    $('#product_tag_tbl').DataTable().ajax.reload();
+                    $('#add_new_tag_modal').modal('hide');
+                }
+            });
+        });
+    //    Product tag status
+        $(document).on('change', 'input.ptag-check', function (e){
+            let id = $(this).attr('status_id');
+            $.ajax({
+                url: 'ptag-status/'+ id,
+                success: function (data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#product_tag_tbl').DataTable().ajax.reload();
+                }
+            });
+        });
+    // Product tag delete
+        $(document).on('click', 'a.ptag-del', function (e){
+            e.preventDefault();
+            let id = $(this).attr('del-ptag-id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'ptag-delete/'+ id,
+                        success:function (data){
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: data+' has been deleted',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $('#product_tag_tbl').DataTable().ajax.reload();
+                        }
+                    });
+
+                }
+            })
+
+        });
+    //    Product tag edit
+        $(document).on('click', 'a.ptag-edit', function (e){
+            e.preventDefault();
+            let id = $(this).attr('edit-ptag-id');
+            $.ajax({
+                url: 'ptag-edit/'+ id,
+                success: function (data){
+                    $('#edit_product_tag_modal form input[name="name"]').val(data.name);
+                    $('#edit_product_tag_modal form').attr('tag-no', data.id);
+                    $('#edit_product_tag_modal').modal('show');
+                }
+            });
+        });
+
+    //    Product tag update
+        $(document).on('submit', '#edit_product_tag_form', function (e){
+            e.preventDefault();
+            let id = $(this).attr('tag-no');
+            $.ajax({
+                url:'ptag/'+ id,
+                method: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#edit_product_tag_modal').modal('hide');
+                    $('#product_tag_tbl').DataTable().ajax.reload();
+                }
+            });
+        });
+
 
     });
 
