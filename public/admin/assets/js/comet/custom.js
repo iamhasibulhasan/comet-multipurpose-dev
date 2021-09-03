@@ -580,6 +580,81 @@
             });
         });
 
+   /* //    Product category table
+        $('#product_pcat_tbl').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: 'product-category',
+            },
+            columns:[
+                {
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'slug',
+                    name: 'slug'
+                },
+                {
+                    data: 'parent',
+                    name: 'parent',
+                },
+                {
+                    data: 'image',
+                    name: 'image',
+                    render: function (data, type, full, meta){
+                        return `
+                            <img style="width: 60px; height: 60px;" src="media/products/category/${data}">
+                        `;
+                    }
+                },
+                {
+                    data:'status',
+                    name:'status',
+                    render:function (data, type, full, meta){
+                        return `
+                            <div class="status-toggle">
+                                <input ${data == 1 ? 'checked="checked"':''} value="${data}" type="checkbox" status_id="${full.id}" id="pcat_status_${full.id}" class="check pcat-check">
+                                <label for="pcat_status_${full.id}" class="checktoggle">checkbox</label>
+                            </div>
+                         `;
+                    }
+                },
+                {
+                    data:'action',
+                    name:'action'
+                }
+            ]
+        });
+
+    //    Add new parent product category
+        $(document).on('submit', '#product_category_form', function (e){
+            e.preventDefault();
+            $.ajax({
+                url: 'product-category/',
+                method: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (data){
+                    Swal.fire({
+                        position: 'top-end',
+                        title: data,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    $('#product_category_form')[0].reset();
+                    $('#product_pcat_tbl').DataTable().ajax.reload();
+                    $('#add_new_pcat_modal').modal('hide');
+                }
+            });
+        });*/
+
 
     });
 

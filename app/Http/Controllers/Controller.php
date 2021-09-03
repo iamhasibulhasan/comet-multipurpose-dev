@@ -30,4 +30,18 @@ class Controller extends BaseController
             return str_replace('watch?v=','embed/', $link);
         }
     }
+    /**
+     * Image Upload Function
+     */
+    public function imageUpload($request, $file, $path){
+        if($request->hasFile($file)){
+            $img = $request->file($file);
+            $unique_name = md5(time().rand()).'.'.$img->getClientOriginalExtension();
+            $img-> move(public_path($path), $unique_name);
+            return $unique_name;
+        }else{
+            return '';
+        }
+
+    }
 }

@@ -32,7 +32,7 @@
                     <a href="#"><i class="fe fe-document"></i> <span> Product </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a href="login.html"> Products </a></li>
-                        <li><a href="register.html"> Category </a></li>
+                        <li class="{{ (Route::currentRouteName() == 'product-category.index') ? 'ok' : '' }}"><a href="{{ route('product-category.index') }}"> Category </a></li>
                         <li class="{{ (Route::currentRouteName() == 'ptag.index') ? 'ok' : '' }}"><a href="{{ route('ptag.index') }}"> Tag </a></li>
                         <li class="{{ (Route::currentRouteName() == 'brand.index') ? 'ok' : '' }}"><a href="{{ route('brand.index') }}"> Brand </a></li>
                     </ul>

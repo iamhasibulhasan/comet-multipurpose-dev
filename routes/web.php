@@ -85,6 +85,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('ptag-delete/{id}', 'App\Http\Controllers\ProductTagController@productTagDelete')->name('ptag.delete');
     Route::get('ptag-edit/{id}', 'App\Http\Controllers\ProductTagController@productTagEdit')->name('ptag.edit');
 
+//    Product category route
+    Route::resource('product-category', 'App\Http\Controllers\ProductcategoryController');
+
 });
 
 
