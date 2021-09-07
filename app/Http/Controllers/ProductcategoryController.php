@@ -129,4 +129,30 @@ class ProductcategoryController extends Controller
             $c->update();
         }
     }
+//    Product category edit modal
+    public function categoryEdit($id){
+        $data = Productcategory::find($id);
+        $all_cat = Productcategory::all();
+
+//      Parent Category
+        $cat_list = "<option value=''>-selected-</option>";
+        foreach ($all_cat as $cat){
+            $selected = '';
+            if ($cat->id == $data->parent){
+                $selected = 'selected';
+            }
+            $cat_list .= "<option {$selected} value='{$cat->id}'>{$cat->name}</option>";
+        }
+
+
+
+        return [
+            'id'        => $data->id,
+            'name'      => $data->name,
+            'icon'      => $data->icon,
+            'image'     => $data->image,
+            'parent'    => $data->parent,
+            'cat_list'  => $cat_list,
+        ];
+    }
 }

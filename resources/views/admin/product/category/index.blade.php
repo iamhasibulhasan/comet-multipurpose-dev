@@ -86,7 +86,7 @@
                                         <li>{{ $cat1->name }}
                                             <!-- Edit delete Button -->
                                             <div class="category-manage">
-                                                <a href="#">Edit</a>
+                                                <a class="edit_cat" edit_id="{{ $cat1->id }}"  href="#">Edit</a>
                                                 <a href="{{ route('product-category.destroy', $cat1->id) }}">Delete</a>
                                             </div>
                                             <!-- /Edit delete Button -->
@@ -95,7 +95,7 @@
                                                     <li>{{ $cat2->name }}
                                                         <!-- Edit delete Button -->
                                                         <div class="category-manage">
-                                                            <a href="#">Edit</a>
+                                                            <a class="edit_cat" edit_id="{{ $cat2->id }}"   href="#">Edit</a>
                                                             <a href="{{ route('product-category.destroy', $cat2->id) }}">Delete</a>
                                                         </div>
                                                         <!-- /Edit delete Button -->
@@ -104,7 +104,7 @@
                                                                 <li>{{ $cat3->name }}
                                                                     <!-- Edit delete Button -->
                                                                     <div class="category-manage">
-                                                                        <a href="#">Edit</a>
+                                                                        <a class="edit_cat" edit_id="{{ $cat3->id }}"  href="#">Edit</a>
                                                                         <a href="{{ route('product-category.destroy', $cat3->id) }}">Delete</a>
                                                                     </div>
                                                                     <!-- /Edit delete Button -->
@@ -113,7 +113,7 @@
                                                                             <li>{{ $cat4->name }}
                                                                             <!-- Edit delete Button -->
                                                                                 <div class="category-manage">
-                                                                                    <a href="#">Edit</a>
+                                                                                    <a class="edit_cat" edit_id="{{ $cat4->id }}" href="#">Edit</a>
                                                                                     <a href="{{ route('product-category.destroy', $cat4->id) }}">Delete</a>
                                                                                 </div>
                                                                                 <!-- /Edit delete Button -->
@@ -122,7 +122,7 @@
                                                                                         <li>{{ $cat5->name }}
                                                                                             <!-- Edit delete Button -->
                                                                                             <div class="category-manage">
-                                                                                                <a href="#">Edit</a>
+                                                                                                <a class="edit_cat" edit_id="{{ $cat5->id }}"  href="#">Edit</a>
                                                                                                 <a href="{{ route('product-category.destroy', $cat5->id) }}">Delete</a>
                                                                                             </div>
                                                                                             <!-- /Edit delete Button -->
@@ -152,5 +152,48 @@
         <!-- /Page Wrapper -->
     </div>
     <!-- /Main Wrapper -->
+    <!-- Edit product category modal -->
+
+    <div class="modal fade" id="edit_product_category_modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3>Edit Category</h3>
+                    <hr>
+                    <form id="edit_product_category_form" form-no="" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input name="name" type="text" class="form-control">
+                            <input name="edit_id" type="hidden" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Icon</label>
+                            <input name="icon" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Parent</label>
+                            <select name="parent_cat" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <img style="width: 150px;" id="product_category_image" alt=""><br>
+                            <label for="image">Image</label>
+                            <input id="image" name="new_image" type="file" class="form-control">
+                            <input name="old_image" type="hidden" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Edit product category modal -->
 
 @endsection

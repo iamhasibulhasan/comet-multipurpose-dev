@@ -114,7 +114,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3>Edit category</h3>
+                    <h3>Edit Brand</h3>
                     <hr>
                     <form id="edit_product_brand_form" form-no="" method="POST" enctype="multipart/form-data">
                         @csrf
