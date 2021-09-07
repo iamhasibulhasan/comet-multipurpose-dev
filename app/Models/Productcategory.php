@@ -13,7 +13,7 @@ class Productcategory extends Model
 
 
 //    Parent category relation
-    public function childCategory(){
+    public function getChild(){
         return $this->hasMany('App\Models\Productcategory', 'parent');
     }
 }

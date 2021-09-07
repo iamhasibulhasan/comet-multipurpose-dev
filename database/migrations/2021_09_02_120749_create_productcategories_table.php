@@ -19,7 +19,6 @@ class CreateProductcategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
-            $table->integer('level')->default(0);
             $table->integer('parent')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('trash')->default(false);

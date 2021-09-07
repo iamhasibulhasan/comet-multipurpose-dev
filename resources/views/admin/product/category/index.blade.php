@@ -82,39 +82,62 @@
                             <div class="card-header">Category Structure</div>
                             <div class="card-body">
                                 <ul>
-                                    @foreach($parent_category as $parent)
-                                        <li>{{ $parent->name }}
-                                            @if(count($parent->childCategory) > 0)
-                                               <ul>
-                                                   @foreach($parent->childCategory as $child2)
-                                                       <li>{{ $child2->name }}
-                                                            @if(count($child2->childCategory) > 0)
-                                                               <ul>
-                                                                   @foreach($child2->childCategory as $child3)
-                                                                       <li>{{ $child3->name }}
-                                                                            @if(count($child3->childCategory) > 0)
+                                    @foreach($parent_category as $cat1)
+                                        <li>{{ $cat1->name }}
+                                            <!-- Edit delete Button -->
+                                            <div class="category-manage">
+                                                <a href="#">Edit</a>
+                                                <a href="{{ route('product-category.destroy', $cat1->id) }}">Delete</a>
+                                            </div>
+                                            <!-- /Edit delete Button -->
+                                            <ul>
+                                                @foreach($cat1->getChild as $cat2)
+                                                    <li>{{ $cat2->name }}
+                                                        <!-- Edit delete Button -->
+                                                        <div class="category-manage">
+                                                            <a href="#">Edit</a>
+                                                            <a href="{{ route('product-category.destroy', $cat2->id) }}">Delete</a>
+                                                        </div>
+                                                        <!-- /Edit delete Button -->
+                                                        <ul>
+                                                            @foreach($cat2->getChild as $cat3)
+                                                                <li>{{ $cat3->name }}
+                                                                    <!-- Edit delete Button -->
+                                                                    <div class="category-manage">
+                                                                        <a href="#">Edit</a>
+                                                                        <a href="{{ route('product-category.destroy', $cat3->id) }}">Delete</a>
+                                                                    </div>
+                                                                    <!-- /Edit delete Button -->
+                                                                    <ul>
+                                                                        @foreach($cat3->getChild as $cat4)
+                                                                            <li>{{ $cat4->name }}
+                                                                            <!-- Edit delete Button -->
+                                                                                <div class="category-manage">
+                                                                                    <a href="#">Edit</a>
+                                                                                    <a href="{{ route('product-category.destroy', $cat4->id) }}">Delete</a>
+                                                                                </div>
+                                                                                <!-- /Edit delete Button -->
                                                                                 <ul>
-                                                                                    @foreach($child3->childCategory as $child4)
-                                                                                        <li>{{ $child4->name }}
-                                                                                            @if(count($child4->childCategory) > 0)
-                                                                                                <ul>
-                                                                                                    @foreach($child4->childCategory as $child5)
-                                                                                                        <li>{{ $child5->name }}</li>
-                                                                                                    @endforeach
-                                                                                                </ul>
-                                                                                            @endif
+                                                                                    @foreach($cat4->getChild as $cat5)
+                                                                                        <li>{{ $cat5->name }}
+                                                                                            <!-- Edit delete Button -->
+                                                                                            <div class="category-manage">
+                                                                                                <a href="#">Edit</a>
+                                                                                                <a href="{{ route('product-category.destroy', $cat5->id) }}">Delete</a>
+                                                                                            </div>
+                                                                                            <!-- /Edit delete Button -->
                                                                                         </li>
                                                                                     @endforeach
                                                                                 </ul>
-                                                                            @endif
-                                                                       </li>
-                                                                   @endforeach
-                                                               </ul>
-                                                            @endif
-                                                       </li>
-                                                   @endforeach
-                                               </ul>
-                                            @endif
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
                                         </li>
                                     @endforeach
                                 </ul>

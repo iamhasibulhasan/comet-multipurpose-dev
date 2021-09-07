@@ -4154,3 +4154,19 @@ Blog post [image, gallery, video, audio]
     border: 1px solid #ccc;
     margin: 5px;
 }
+/*
+    Edit Category div
+*/
+
+.category-manage{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+}
+.category-manage a:nth-child(1){
+    color: blue;
+}
+.category-manage a:nth-child(2){
+    color: red;
+}

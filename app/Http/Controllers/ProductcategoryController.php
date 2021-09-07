@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Productcategory;
 use Illuminate\Http\Request;
+use Psr\Log\NullLogger;
 
 class ProductcategoryController extends Controller
 {
@@ -14,10 +15,10 @@ class ProductcategoryController extends Controller
      */
     public function index()
     {
-        $all_data = Productcategory::orderby('name', 'ASC')->get();
-        $parent_category = Productcategory::where('level', 0)->where('parent', NULL)->get();
+        $all_data = Productcategory::latest()->get();
+        $parent_category = Productcategory::where('parent', Null)->get();
         return view('admin.product.category.index', [
-            'all_data'      =>  $all_data,
+            'all_data'             =>  $all_data,
             'parent_category'      =>  $parent_category
         ]);
     }
@@ -36,29 +37,25 @@ class ProductcategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-
+        // Category Image Upload
         $image = $this->imageUpload($request, 'image', 'media/products/category/');
 
-        if (empty($request->parent)){
-            Productcategory::create([
-                'name'          =>  $request->name,
-                'slug'          =>  $this->getSlug($request->name),
-                'image'         =>  $image
-            ]);
-        }else{
-            $parent = Productcategory::find($request->parent);
-            Productcategory::create([
-                'name'          =>  $request->name,
-                'slug'          =>  $this->getSlug($request->name),
-                'image'         =>  $image,
-                'level'         =>  $parent->level + 1,
-                'parent'        =>  $parent->id,
-            ]);
-        }
+
+        //Check Parent Category
+        $parent = NULL;
+
+
+        Productcategory::create([
+            'name'          =>  $request->name,
+            'slug'          =>  $this->getSlug($request->name),
+            'icon'          =>  $request->icon,
+            'image'         =>  $image,
+            'parent'        =>  (!empty($request->parent)) ? $request->parent : NULL,
+        ]);
 
         return back();
     }
@@ -106,5 +103,30 @@ class ProductcategoryController extends Controller
     public function destroy(Productcategory $productcategory)
     {
         //
+    }
+
+    /**
+     * @param Category Destroy
+     *
+     */
+    public function categoryDestroy($id)
+    {
+        $delete_cat = Productcategory::find($id);
+        $parent_id = $delete_cat->parent;
+        $data_id = $delete_cat->id;
+//        Call cat manage function
+        $this->catManage($data_id, $parent_id);
+
+        $delete_cat->delete();
+        return back();
+    }
+
+//    Get child function
+    public function catManage($id, $parent){
+        $child = Productcategory::where('parent', $id)->get();
+        foreach ($child as $c){
+            $c->parent = $parent;
+            $c->update();
+        }
     }
 }
