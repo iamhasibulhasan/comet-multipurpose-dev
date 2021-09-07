@@ -144,8 +144,6 @@ class ProductcategoryController extends Controller
             $cat_list .= "<option {$selected} value='{$cat->id}'>{$cat->name}</option>";
         }
 
-
-
         return [
             'id'        => $data->id,
             'name'      => $data->name,
@@ -155,4 +153,31 @@ class ProductcategoryController extends Controller
             'cat_list'  => $cat_list,
         ];
     }
+//    Product category update
+public function categoryUpdate(Request $request){
+
+    //    Image Change
+    if ($request->hasFile('new_image')){
+        $image = $this->imageUpload($request, 'new_image', 'media/products/category/');
+    }else{
+        $image = $request->old_image;
+    }
+
+
+    $update_data = Productcategory::find($request->edit_id);
+
+
+    $this->catManage($update_data->id, $update_data->parent);
+
+    $update_data->name      = $request->name;
+    $update_data->slug      = $this->getSlug($request->name);
+    $update_data->icon      = $request->icon;
+    $update_data->image     = $image;
+    $update_data->parent    = $request->parent_cat;
+    $update_data->update();
+
+    return back();
+}
+
+
 }

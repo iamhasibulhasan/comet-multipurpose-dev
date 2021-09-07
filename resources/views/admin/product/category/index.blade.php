@@ -163,9 +163,8 @@
                     </button>
                     <h3>Edit Category</h3>
                     <hr>
-                    <form id="edit_product_category_form" form-no="" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('product-category.update') }}" id="edit_product_category_form" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="form-group">
                             <label for="">Name</label>
                             <input name="name" type="text" class="form-control">
@@ -180,7 +179,7 @@
                             <select name="parent_cat" class="form-control"></select>
                         </div>
                         <div class="form-group">
-                            <img style="width: 150px;" id="product_category_image" alt=""><br>
+                            <img style="width: 150px;" id="product_category_image" alt=""><br><br>
                             <label for="image">Image</label>
                             <input id="image" name="new_image" type="file" class="form-control">
                             <input name="old_image" type="hidden" class="form-control">

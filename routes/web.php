@@ -89,6 +89,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('product-category', 'App\Http\Controllers\ProductcategoryController');
     Route::get('product-category/destroy/{id}', 'App\Http\Controllers\ProductcategoryController@categoryDestroy')->name('product-category.destroy');
     Route::get('product-category/edit/{id}', 'App\Http\Controllers\ProductcategoryController@categoryEdit')->name('product-category.edit');
+    Route::get('product/category/update', 'App\Http\Controllers\ProductcategoryController@categoryUpdate')->name('product-category.update');
 
 });
 
